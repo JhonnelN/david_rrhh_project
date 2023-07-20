@@ -9,6 +9,7 @@
     source env/bin/activate
   
 ## 3- Install requirements
+Enter in david_project folder
 
     pip install -r requirements/common.txt
 
