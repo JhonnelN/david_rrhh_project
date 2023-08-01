@@ -117,7 +117,7 @@ TIME_ZONE = 'America/Caracas'
 
 USE_I18N = True
 
-USE_TZ = True
+#USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -129,3 +129,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Media
+# Ruta donde se almacenarán los archivos cargados por los usuarios
+MEDIA_ROOT = os.path.join(BASE_DIR, 'archivos')
+
+# URL para acceder a los archivos cargados por los usuarios
+MEDIA_URL = '/archivos/'

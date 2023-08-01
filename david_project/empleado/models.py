@@ -5,6 +5,8 @@ from django.db import models
 class Departamento(models.Model):
     nombre = models.CharField(max_length=100)
 
+    def __str__(self):
+        return f'{self.nombre}'
 
 class Empleado(models.Model):
     nombre = models.CharField(max_length=100)
@@ -12,6 +14,7 @@ class Empleado(models.Model):
     fecha_nacimiento = models.DateField()
     correo = models.EmailField()
     telefono = models.CharField(max_length=20)
+    cedula = models.PositiveIntegerField(null=True, blank=True)
     direccion = models.CharField(max_length=200)
     puesto = models.CharField(max_length=100)
     salario = models.DecimalField(max_digits=8, decimal_places=2)
@@ -27,7 +30,6 @@ class Solicitud(models.Model):
     TIPO_CHOICES = (
         ('vacaciones', 'Vacaciones'),
         ('reposo_medico', 'Reposo Médico'),
-        ('permiso_extraordinario', 'Permiso Extraordinario'),
     )
 
     ESTADO_CHOICES = (
@@ -43,3 +45,10 @@ class Solicitud(models.Model):
     final_permiso = models.DateField()
     descripcion = models.TextField(blank=True, null=True)
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='espera')
+    
+    class Meta:
+        verbose_name = "Solicitud"
+        verbose_name_plural = "Solicitudes"
+    
+    def __str__(self):
+        return f'{self.tipo} - {self.estado}'

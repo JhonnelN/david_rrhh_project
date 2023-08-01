@@ -9,6 +9,7 @@ class Candidato(models.Model):
     puesto_deseado = models.CharField(max_length=100)
     experiencia = models.TextField()
     educacion = models.TextField()
+    curriculum = models.FileField(upload_to='curriculums/', null=True)
     # Otros campos relevantes para el candidato
     
     def __str__(self):
@@ -39,6 +40,10 @@ class SolicitudEmpleo(models.Model):
     estado = models.CharField(max_length=100, choices=ESTADO_CHOICES)
     # Otros campos relevantes para la solicitud de empleo
     
+    class Meta:
+        verbose_name = "Solicitud de empleo"
+        verbose_name_plural = "Solicitud de empleos"
+
     def __str__(self):
         return f'{self.candidato} - {self.vacante}'
 
@@ -53,9 +58,18 @@ class Entrevista(models.Model):
     def __str__(self):
         return f'Entrevista para {self.solicitud} - {self.fecha_entrevista}'
 
+
 class Evaluacion(models.Model):
     candidato = models.ForeignKey('Candidato', on_delete=models.CASCADE)
     fecha = models.DateField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name = "Evaluacion"
+        verbose_name_plural = "Evaluaciones"
+    
+    def __str__(self):
+        return f'Evaluacion de {self.candidato}'
+
 
 class Criterio(models.Model):
     evaluacion = models.ForeignKey(Evaluacion, on_delete=models.CASCADE)
